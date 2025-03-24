@@ -64,18 +64,6 @@ test('Sauce Demo Playwright', async ({ page }) => {
             { locator: '[data-test="product-sort-container"]', option: 'hilo'},
         ]);
 
-        // // Validar resultados
-        // await f.validarTextos([
-        //     {locator: 'tbody', text: filtros[0]},
-        //     {locator: 'tbody', text: filtros[1]},
-        //     {locator: 'tbody', text: filtros[2]},
-        //     {locator: 'tbody', text: filtros[3]}
-        // ]);
-        // await f.textosNoEsperados([
-        //     {locator: 'tbody', text: noEsperables[0]},
-        //     {locator: 'tbody', text: noEsperables[1]}
-        // ]);
-
     });
 
     // Comprar
