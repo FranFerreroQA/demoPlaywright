@@ -66,8 +66,8 @@ test('Sauce Demo Playwright', async ({ page }) => {
 
     });
 
-    // Comprar
-    await test.step('Comprar', async () => {
+    // Realizar compra
+    await test.step('Realizar compra', async () => {
 
         await f.clickLocators([
             { locator: '[data-test="add-to-cart-sauce-labs-backpack"]' },
@@ -110,7 +110,7 @@ test('Sauce Demo Playwright', async ({ page }) => {
             { locator: '[data-test="cancel"]' },
             { locator: '[data-test="finish"]' }
         ]);
-        await f.clickLocator('[data-test="finish"]');
+        await f.clickLocator('failTest');
         await f.validarTextos([
             { locator: '[data-test="title"]', text: 'Checkout: Complete!' },
             { locator: '[data-test="complete-text"]', text: 'Your order has been dispatched, and will arrive just as fast as the pony can get there!' },
