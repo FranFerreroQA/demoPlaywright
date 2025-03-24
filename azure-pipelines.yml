@@ -1,72 +1,72 @@
-pool:
-  vmImage: 'ubuntu-latest'
+# pool:
+#   vmImage: 'ubuntu-latest'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18'
-  displayName: 'Install Node.js'
+# steps:
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '18'
+#   displayName: 'Install Node.js'
 
-- script: npm ci
-  displayName: 'npm ci'
+# - script: npm ci
+#   displayName: 'npm ci'
 
-- script: npx playwright install --with-deps
-  displayName: 'Install Playwright browsers'
+# - script: npx playwright install --with-deps
+#   displayName: 'Install Playwright browsers'
 
-- script: |
-    export CI=true
-    npx playwright test
-  displayName: 'Run Playwright tests'
+# - script: |
+#     export CI=true
+#     npx playwright test
+#   displayName: 'Run Playwright tests'
 
-# Verificar si existe el archivo index.html
-- script: |
-    echo "Verificando si index.html existe en la carpeta playwright-report"
-    if [ -f "./playwright-report/index.html" ]; then
-      echo "index.html encontrado"
-    else
-      echo "index.html no encontrado"
-      exit 1
-    fi
-  displayName: 'Verificar existencia de index.html'
+# # Verificar si existe el archivo index.html
+# - script: |
+#     echo "Verificando si index.html existe en la carpeta playwright-report"
+#     if [ -f "./playwright-report/index.html" ]; then
+#       echo "index.html encontrado"
+#     else
+#       echo "index.html no encontrado"
+#       exit 1
+#     fi
+#   displayName: 'Verificar existencia de index.html'
 
-# Verificar que todos los archivos necesarios estén presentes en la carpeta playwright-report
-- script: |
-    echo "Verificando los archivos en la carpeta playwright-report"
-    ls -l ./playwright-report
-  displayName: 'Verificar archivos en playwright-report'
+# # Verificar que todos los archivos necesarios estén presentes en la carpeta playwright-report
+# - script: |
+#     echo "Verificando los archivos en la carpeta playwright-report"
+#     ls -l ./playwright-report
+#   displayName: 'Verificar archivos en playwright-report'
 
-- task: PublishTestResults@2
-  displayName: 'Publish test results'
-  inputs:
-    searchFolder: './test-results'
-    testResultsFormat: 'JUnit'
-    testResultsFiles: 'results.xml'
-    mergeTestResults: true
-    failTaskOnFailedTests: true
-    testRunTitle: 'My End-To-End Tests'
-  condition: succeededOrFailed()
+# - task: PublishTestResults@2
+#   displayName: 'Publish test results'
+#   inputs:
+#     searchFolder: './test-results'
+#     testResultsFormat: 'JUnit'
+#     testResultsFiles: 'results.xml'
+#     mergeTestResults: true
+#     failTaskOnFailedTests: true
+#     testRunTitle: 'My End-To-End Tests'
+#   condition: succeededOrFailed()
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: './playwright-report'
-    artifact: playwright-report
-    publishLocation: 'pipeline'
-  condition: succeededOrFailed()
+# - task: PublishPipelineArtifact@1
+#   inputs:
+#     targetPath: './playwright-report'
+#     artifact: playwright-report
+#     publishLocation: 'pipeline'
+#   condition: succeededOrFailed()
 
-# Verificar si existe el archivo index.html antes de publicar el reporte HTML
-- script: |
-    echo "Verificando si index.html existe en la carpeta playwright-report antes de publicar el reporte HTML"
-    if [ -f "./playwright-report/index.html" ]; then
-      echo "index.html encontrado"
-    else
-      echo "index.html no encontrado"
-      exit 1
-    fi
-  displayName: 'Verificar existencia de index.html antes de publicar el reporte HTML'
+# # Verificar si existe el archivo index.html antes de publicar el reporte HTML
+# - script: |
+#     echo "Verificando si index.html existe en la carpeta playwright-report antes de publicar el reporte HTML"
+#     if [ -f "./playwright-report/index.html" ]; then
+#       echo "index.html encontrado"
+#     else
+#       echo "index.html no encontrado"
+#       exit 1
+#     fi
+#   displayName: 'Verificar existencia de index.html antes de publicar el reporte HTML'
 
-- task: PublishHtmlReport@1
-  displayName: "Resultados de pruebas en HTML"
-  condition: succeededOrFailed()
-  inputs:
-    reportDir: './playwright-report/index.html'
-    tabName: 'Pruebas Playwright'
+# - task: PublishHtmlReport@1
+#   displayName: "Resultados de pruebas en HTML"
+#   condition: succeededOrFailed()
+#   inputs:
+#     reportDir: './playwright-report/index.html'
+#     tabName: 'Pruebas Playwright'
