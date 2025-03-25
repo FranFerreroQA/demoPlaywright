@@ -10,13 +10,13 @@ export class Funciones {
         await this.page.goto(url);
     }
 
-    async elementosVisiblesR(elements) {
+    async elementosVisiblesE(elements) {
         for (const { role, name } of elements) {
             await expect(this.page.getByRole(role, { name, exact: true })).toBeVisible();
         }
     }
 
-    async elementosVisiblesE(elements) {
+    async elementosVisiblesR(elements) {
         for (const { role, name } of elements) {
             await expect(this.page.getByRole(role, { name })).toBeVisible();
         }
@@ -85,10 +85,21 @@ export class Funciones {
         }
     }
 
+    async getByLabel(elements) { 
+        for (const { label } of elements) {
+            await this.page.getByLabel(label);
+        }
+    }
+
     async textosNoEsperados(elements) {
         for (const { locator, text } of elements) {
             await expect(this.page.locator(locator)).not.toContainText(text);
         }
+    }
+
+    async buscarPorTexto(buscar) {
+        await this.page.locator('#translControl1').fill(buscar);
+        await this.page.getByLabel('Buscar').click();
     }
 
     async resultados(buscar) {

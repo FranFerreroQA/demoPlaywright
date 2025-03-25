@@ -21,7 +21,7 @@ module.exports = defineConfig({
       use: { browserName: 'firefox' },
     },
     {
-      name: 'webkit', // Pruebas en Safari
+      name: 'webkit', // Pruebas en Safari, Apple
       use: { browserName: 'webkit' },
     },
   ],
