@@ -51,7 +51,6 @@ Use the following commands in your terminal to set up and manage your Playwright
 - Ensure Node.js is installed on your machine.
 - It is recommended to install the Playwright extension for Visual Studio Code.
 
-
 ---
 
 Happy testing! 🚀

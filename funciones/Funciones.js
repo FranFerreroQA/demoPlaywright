@@ -34,18 +34,6 @@ export class Funciones {
         }
     }
 
-    async llenarCampos(elements) {
-        for (const { placeholder, text } of elements) {
-            await this.page.getByRole('textbox', { name: placeholder }).fill(text);
-        }
-    }
-
-    async llenarCamposL(elements) {
-        for (const { locator, text } of elements) {
-            await this.page.locator(locator).fill(text);
-        }
-    }
-
     async clickButtons(buttonNames) {
         for (const name of buttonNames) {
             await this.page.getByRole('button', { name, exact: true }).click();
@@ -67,7 +55,19 @@ export class Funciones {
             await this.page.locator(locator).click();
         }
     }
-    
+
+    async llenarCampos(elements) {
+        for (const { placeholder, text } of elements) {
+            await this.page.getByRole('textbox', { name: placeholder }).fill(text);
+        }
+    }
+
+    async llenarCamposL(elements) {
+        for (const { locator, text } of elements) {
+            await this.page.locator(locator).fill(text);
+        }
+    }
+
     async loguearse(credenciales, buttonName) {
         await this.llenarCampos(credenciales);
         await this.clickButtons(buttonName);
@@ -121,14 +121,6 @@ export class Funciones {
             await this.page.locator(locator).click();
             await this.page.locator(locator).selectOption(option);
         }
-    }
-
-    async verFicha(index) {
-        await this.page.locator(`tr:nth-child(${index}) > td:nth-child(9)`).click();
-    }
-
-    async checkearCaso(index) {
-        await this.page.locator(`tr:nth-child(${index}) > td > .flex`).click();
     }
 
 }
